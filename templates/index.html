@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
   <title>Password Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-  <h1>Password <br>Generator</h1>
-  
-  <form action="{{ url_for('generate') }}" method="post">
-    <label for="num_of_passwd">How many passwords would you like to generate?</label><br>
-    <input type="text" id="num_of_passwd" name="num_of_passwd" required><br><br>
+  <div class="container">
+    <h1>Password Generator</h1> 
+    <form action="{{ url_for('generate') }}" method="post">
+      <label for="num_of_passwd">How many passwords would you like to generate?</label>
+      <input type="text" id="num_of_passwd" name="num_of_passwd" required>
 
-    <label for="char_num">Please type in how many characters your password(s) should be:</label><br>
-    <input type="text" id="char_num" name="char_num" required><br><br>
+      <label for="char_num">Please type in how many characters your password(s) should be:</label>
+      <input type="text" id="char_num" name="char_num" required>
 
-    <label for="type_of_chars">Do you want your password(s) to have letters, numbers, and/or symbols? Please pick from the list below by selecting 1, 2, and/or 3. You can also say 'all' or combine numbers, 12.</label><br>
-    <input type="text" id="type_of_chars" name="type_of_chars" required><br><br>
+      <label for="type_of_chars">Do you want your password(s) to have letters, numbers, and/or symbols?</label>
+      <p class="hint">Please pick from the list below by selecting 1, 2, and/or 3. You can also say 'all' or combine numbers, 12.</p>
+      <input type="text" id="type_of_chars" name="type_of_chars" required>
 
-    <input type="submit" value="Generate">
-  </form>
+      <input type="submit" value="Generate">
+    </form>
+  </div>
 
   {% if passwords %}
     <h2>Your Generated Password(s):</h2>
@@ -30,5 +32,7 @@
       {% endfor %}
     </ul>
   {% endif %}
+
+
 </body>
 </html>
