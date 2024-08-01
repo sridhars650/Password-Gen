@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Password Generator</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
   <div class="container">
-    <h1>Password Generator</h1> 
+    <h1>Password Generator</h1>
     <form action="{{ url_for('generate') }}" method="post">
       <label for="num_of_passwd">How many passwords would you like to generate?</label>
       <input type="text" id="num_of_passwd" name="num_of_passwd" required>
@@ -24,15 +25,37 @@
     </form>
   </div>
 
-  {% if passwords %}
-    <h2>Your Generated Password(s):</h2>
-    <ul>
-      {% for password in passwords %}
-        <li>{{ password }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+  <div id="passwordModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Your Generated Password(s):</h2>
+      <ul id="passwordList">
+        {% for password in passwords %}
+          <li>{{ password }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var modal = document.getElementById("passwordModal");
+      var span = document.getElementsByClassName("close")[0];
 
+      if ("{{ passwords|length > 0 }}") {
+        modal.style.display = "block";
+      }
+
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    });
+  </script>
 </body>
 </html>
